@@ -13,10 +13,21 @@ This project involves redesigning the database system for a group chatting softw
 ```bash
 # Clone this repository
 $ git clone https://github.com/act-computer-science-group-assignment/chat-oracledb.git
+
 # Go into the repository
 $ cd chat-oracledb
+
+# Create a .env file for environment variables in your root directory
+$ touch .env
+
+# Add the following environment variables to your .env file
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_CONNECT_STRING=your_connect_string
+
 # Install dependencies
 $ npm install
+
 # Run the app
 $ npm run dev
 ```
@@ -77,6 +88,16 @@ We enable replication to a different database in real time by using materialized
 | room_id | int(11) | NO | | NULL | |
 
 ### messages
+
+| Field | Type | Null | Key | Default | Extra |
+| --- | --- | --- | --- | --- | --- |
+| id | int(11) | NO | PRI | NULL | auto_increment |
+| sender_id | int(11) | NO | | NULL | |
+| room_id | int(11) | NO | | NULL | |
+| message_text | varchar(500) | NO | | NULL | |
+| timestamp | timestamp | NO | | NULL | |
+
+## replication_chat_messages
 
 | Field | Type | Null | Key | Default | Extra |
 | --- | --- | --- | --- | --- | --- |
