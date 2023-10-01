@@ -223,4 +223,4 @@ USING
 ```
 
 ### The database schema
- [db.sql](https://github.com/act-computer-science-group-assignment/chat-oracledb/db.sql)
+ [db.sql](https://github.com/act-computer-science-group-assignment/chat-oracledb/blob/main/db.sql)
