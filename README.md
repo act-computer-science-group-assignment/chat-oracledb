@@ -12,14 +12,14 @@ This project involves redesigning the database system for a group chatting softw
 
 ```bash
 # Clone this repository
-$ git clone <repository_url>
+$ git clone https://github.com/act-computer-science-group-assignment/chat-oracledb.git
 # Go into the repository
-$ cd <repository_directory>
+$ cd chat-oracledb
 # Install dependencies
 $ npm install
 # Run the app
 $ npm run dev
-
+```
 
 ## Oracle db tables
 
@@ -191,5 +191,36 @@ CREATE DATABASE LINK chat_db_link
 END;
 ```
 
+### Creating remote links for sharding
 
-### More information about schema can be found in the [db.sql](
+```sql
+ALTER DATABASE SET SHARD=TRUE;
+
+CREATE SHARD shard_a SET LOCATION = 'Server A';
+CREATE SHARD shard_b SET LOCATION = 'Server B';
+
+CREATE DATABASE LINK shard_a_link
+CONNECT TO chat IDENTIFIED BY chat1234
+USING
+  '(DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.15)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+  )';
+
+CREATE DATABASE LINK shard_b_link
+CONNECT TO chat IDENTIFIED BY chat1234
+USING
+  '(DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.8)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+  )';
+```
+
+### The database schema
+ [db.sql](https://github.com/act-computer-science-group-assignment/chat-oracledb/db.sql)
